@@ -4,8 +4,8 @@ from Crypto import Random
 from collections import namedtuple
 from itertools import izip
 from struct import pack, unpack
-import hmac
 from hashlib import sha256
+import hmac
 
 class PacketHandler(object):
     """ This is a contructor object for a packet data handler. One of 
