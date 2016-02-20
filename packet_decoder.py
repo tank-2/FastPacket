@@ -40,7 +40,7 @@ class PacketHandler(object):
             if not all([hmac_secret, key]): raise StandardError("hmac_secret or key not given")
             to_hmac = ''.join(i for i,j in izip(raw_packet, raw_packet._fields) if j not in self.hmac_exclude)
             if not (hmac.new(hmac_secret, to_hmac, sha256).digest() == raw_packet.hmac):
-                print Warning("hmac does not match")#TODO remove pass
+                raise ValueError("hmac does not match")
             cipher_text = ''.join(i for i,j in izip(raw_packet, raw_packet._fields) if j not in self.cipher_exclude)
             cipher = AES.new(key, AES.MODE_CBC, raw_packet.iv)
             plain_text = self.unpad(cipher.decrypt(cipher_text))
